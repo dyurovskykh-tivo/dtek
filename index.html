@@ -8,8 +8,9 @@
         var timeLeft = countDownDate - new Date().getTime();
         var hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        var secondsLeft = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("output").innerHTML = "Time to white: " + hoursLeft + "h " + minutesLeft + "m";
+        document.getElementById("output").innerHTML = "Time to white: " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
       }, 1000);
     </script>
   </body>
