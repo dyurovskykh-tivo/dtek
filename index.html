@@ -1,18 +1,18 @@
 <html>
   <body>
-    <p id="output"/>
+    <p id="output-white"/>
     <script>
-      var nextWhiteDate = new Date("Jan 5, 2030 15:37:25").getTime();
-      var nextGreyDate = new Date("Jan 5, 2030 15:37:25").getTime();
+      let dateMap = {white: new Date("Jan 5, 2030 15:37:25").getTime()};
+      for (let [label, date] of objectEntries(dateMap)) {
+        setInterval(function() {
+          var timeLeft = date - new Date().getTime();
+          var hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+          var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-      setInterval(function() {
-        var timeLeft = nextWhiteDate - new Date().getTime();
-        var hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        document.getElementById("output").innerHTML = "Time to white: " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
-      }, 1000);
+          document.getElementById("output-" + label).innerHTML = "Time to " + label + ": " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
+        }, 1000);
+      }
     </script>
   </body>
 </html>
