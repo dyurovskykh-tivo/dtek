@@ -1,13 +1,11 @@
 <html>
   <body>
     <p id="output-white"/>
-    <p id="test"/>
     <script>
       let dateMap = {white: new Date("Jan 5, 2030 15:37:25").getTime()};
-      for (let [label, date] of objectEntries(dateMap)) {
-        document.getElementById("test").innerHTML = label;
+      for (label in dateMap) {
         setInterval(function() {
-          var timeLeft = date - new Date().getTime();
+          var timeLeft = dateMap[label] - new Date().getTime();
           var hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           var minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
           var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
