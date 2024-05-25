@@ -10,7 +10,7 @@
           var minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
           var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-          document.getElementById("output-" + label).innerHTML = "Time to " + label + ": " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
+          document.getElementById("output-" + label).innerHTML = "Time to '" + label + "': " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
         }, 1000);
       }
     </script>
