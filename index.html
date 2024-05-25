@@ -3,8 +3,6 @@
     <p id="now"/>
     <p id="output-white"/>
     <p id="output-grey"/>
-    <p id="test1"/>
-    <p id="test2"/>
     <script>
       let scheduleMap = {
         0: [], 1: [], 2: [], 3: [], 4: [], 5: [],
@@ -31,16 +29,14 @@
               break
             }
 		  }
-          timeLeftSec = Math.floor((nextHour-1) * 3600 - (now.getTime() % 86400000)/1000)
-          document.getElementById("test1").innerHTML = "Now hour (" + label + "): "+ nowHour;
-          document.getElementById("test2").innerHTML = "Next hour (" + label + "): " + nextHour;
-          
-          document.getElementById("now").innerHTML = "Now: " + nowLabel;
+          timeLeftSec = Math.floor((nextHour-3) * 3600 - (now.getTime() % 86400000)/1000)
+
+          document.getElementById("now").innerHTML = "Now is '" + nowLabel + "' interval";
           var hoursLeft = Math.floor(timeLeftSec % 86400 / 3600);
           var minutesLeft = Math.floor(timeLeftSec % 3600 / 60);
           var secondsLeft = Math.floor(timeLeftSec % 60);
 
-          document.getElementById("output-" + label).innerHTML = "Time to '" + label + "': " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
+          document.getElementById("output-" + label).innerHTML = "Time to start of the next '" + label + "' interval: " + hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s";
         }
       }, 1000);
     </script>
