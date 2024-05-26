@@ -5,33 +5,31 @@
     <p id="output-grey"/>
     <script>
       let scheduleMap = {
-        0: [], 1: [], 2: [], 3: [], 4: [], 5: [],
-        6: {
-          14: "black", 15: "black",
-          16: "grey", 17: "grey", 18: "grey",
-          19: "white",
+        0: [], 1: {1: "white"}, 2: {}, 3: [], 4: [], 5: [],
+        0: {
+          13: "black", 15: "black",
+          16: "agrey", 17: "agrey", 18: "grey",
+          19: "uwhite",
         },
       };
-      setInterval(function() {
-        let dateMap = {
-          white: new Date("Jan 5, 2030 15:37:25").getTime(),
-          grey: new Date("Jan 5, 2030 05:07:25").getTime(),
-        };
-        for (label in dateMap) {
-          var now = new Date();
-          nowHour = Math.floor((now.getTime() % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + 3;
-          schedule = scheduleMap[now.getDay()];
-          nowLabel = schedule[nowHour]
-          nextHour = ""
+      function findNextHour(label, day, nowHour) {
+          schedule = scheduleMap[day];
           for (let i = nowHour; i < 24; i++) {
 			if (schedule[i] == label) {
-              nextHour = i
-              break
+              return i
             }
 		  }
+          return 24+findNextHour(label, day+1, 0)
+      }
+      setInterval(function() {
+        for (label in {white: null, grey: null}) {
+          var now = new Date();
+          nowHour = Math.floor((now.getTime() % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + 3;
+          nextHour = findNextHour(label, now.getDay(), nowHour)
+          
           timeLeftSec = Math.floor((nextHour-3) * 3600 - (now.getTime() % 86400000)/1000)
 
-          document.getElementById("now").innerHTML = "Now is '" + nowLabel + "' interval";
+          document.getElementById("now").innerHTML = "Now is '" + scheduleMap[now.getDay()][nowHour] + "' interval";
           var hoursLeft = Math.floor(timeLeftSec % 86400 / 3600);
           var minutesLeft = Math.floor(timeLeftSec % 3600 / 60);
           var secondsLeft = Math.floor(timeLeftSec % 60);
